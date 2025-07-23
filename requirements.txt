@@ -1,0 +1,18 @@
+# ---------------- Core Frameworks ----------------
+fastapi==0.116.1
+uvicorn==0.35.0
+
+# ---------------- Computer Vision & AI ----------------
+opencv-python==4.12.0.88
+mtcnn==1.0.0
+tensorflow==2.19.0
+torch==2.2.0+cu118
+torchvision==0.17.0+cu118
+torchaudio==2.2.0+cu118
+--extra-index-url https://download.pytorch.org/whl/cu118
+
+# ---------------- NLP & Transformers ----------------
+transformers==4.53.3
+
+# ---------------- Databases & RAG ----------------
+chromadb==1.0.15
