@@ -159,7 +159,7 @@ def delete_embeddings_api(employee_code: str = Query(..., title="Employee Code")
     """
     try:
         logger.info(f"Request to delete embeddings for employee_code: {employee_code}")
-        response = face_recognition.delete_embeddings(employee_code)
+        response = face_embedding.delete_embeddings_by_emp_code(employee_code)
         logger.info(f"Delete response: {response}")
         return {"message": response}
     except Exception as e:

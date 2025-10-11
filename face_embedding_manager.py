@@ -15,7 +15,7 @@ from logger import get_logger
 from face_data_manager import FaceDataManager
 
 # ------------------- Initialization --------------------------
-logger = get_logger()
+logger = get_logger(__name__)
 face_manager = FaceDataManager()
 
 

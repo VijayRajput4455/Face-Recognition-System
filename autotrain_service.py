@@ -9,7 +9,7 @@ from face_embedding_manager import FaceEmbeddingManager
 from face_data_manager import FaceDataManager  # Ensure these are implemented
 
 # ------------------- Initialization --------------------------
-logger = get_logger()
+logger = get_logger(__name__)
 face_embed = FaceEmbeddingManager()
 face_manager = FaceDataManager()
 

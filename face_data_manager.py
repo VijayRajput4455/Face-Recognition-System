@@ -23,7 +23,7 @@ class FaceDataManager:
     """
 
     def __init__(self, frame_dir=FRAME_STORAGE_DIR, main_dir=MAIN_DIR, video_dir=VIDEO_STORAGE_DIR):
-        self.logger = get_logger()
+        self.logger = get_logger(__name__)
         self.frame_dir = Path(frame_dir)
         self.main_dir = Path(main_dir)
         self.video_dir = Path(video_dir)

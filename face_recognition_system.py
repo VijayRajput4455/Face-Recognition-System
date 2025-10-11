@@ -4,15 +4,15 @@ import os
 # ------------------- Third-Party Libraries -------------------
 import chromadb
 from mtcnn.mtcnn import MTCNN
-from transformers import CLIPProcessor, CLIPModel
 
 # ------------------- Local Modules ---------------------------
 from logger import get_logger
 from config import CHROMA_DB_PATH
 from face_embedding_manager import FaceEmbeddingManager
+from transformers import CLIPProcessor, CLIPModel
 
 # ------------------- Initialization --------------------------
-logger = get_logger()
+logger = get_logger(__name__)
 face_embedding = FaceEmbeddingManager()
 
 class FaceRecognitionSystem:

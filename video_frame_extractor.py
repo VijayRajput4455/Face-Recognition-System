@@ -7,10 +7,10 @@ import cv2
 
 # ------------------- Local Modules ---------------------------
 from logger import get_logger
-from config import *  # Consider avoiding wildcard imports
+from config import FRAME_STORAGE_DIR
 
 # ------------------- Initialization --------------------------
-logger = get_logger()
+logger = get_logger(__name__)
 
 class VideoFrameExtractor:
     def __init__(self, name, age, gender, employee_id, video_url, max_frames=50):
@@ -123,13 +123,13 @@ class VideoFrameExtractor:
             return f"Unexpected error occurred: {str(e)}"
         
 
-# if __name__ == "__main__":
-#     extractor = VideoFrameExtractor(
-#         name="Vijay",
-#         age="28",
-#         gender="M",
-#         employee_id="YT470",
-#         video_url=r"AANAND.MOV"
-#     )
-#     result = extractor.extract_frames()
-#     print("Result:", result)
+if __name__ == "__main__":
+    extractor = VideoFrameExtractor(
+        name="Vijay",
+        age="28",
+        gender="M",
+        employee_id="YT470",
+        video_url=r"AANAND.MOV"
+    )
+    result = extractor.extract_frames()
+    print("Result:", result)

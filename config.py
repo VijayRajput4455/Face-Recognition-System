@@ -11,6 +11,10 @@ VIDEO_STORAGE_DIR = BASE_DIR / "Data" / "Received_Videos_Data"
 # Path to ChromaDB database
 CHROMA_DB_PATH = BASE_DIR / "Database" / "chromaDB"
 
+# Path to Logs directories
+LOG_DIR = "face_logs"
+LOG_FILE = "face_recognition.log"
+
 # ------------------- Ensure Directories Exist ----------------
 for directory in [MAIN_DIR, FRAME_STORAGE_DIR, VIDEO_STORAGE_DIR, CHROMA_DB_PATH.parent]:
     directory.mkdir(parents=True, exist_ok=True)

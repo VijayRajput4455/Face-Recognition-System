@@ -1,56 +1,29 @@
-# ------------------- Standard Library -------------------
-import os
 import logging
-from pathlib import Path
+import os
+from config import LOG_DIR, LOG_FILE
 
-def get_logger(
-    name: str = "face_logger",
-    log_dir: str = "face_logs",
-    log_file_name: str = "face_recognition.log",
-    level: int = logging.INFO
-) -> logging.Logger:
-    """
-    Creates and returns a configured logger that:
-    - Logs messages to both console and file
-    - Automatically creates the log directory if missing
-    - Prevents duplicate handlers if called multiple times
+os.makedirs(LOG_DIR, exist_ok=True)
+LOG_FILE = os.path.join(LOG_DIR, LOG_FILE)
 
-    Args:
-        name (str): Logger name (useful when logging across multiple modules)
-        log_dir (str): Directory for log file
-        log_file_name (str): Name of the log file
-        level (int): Logging level (e.g., logging.INFO, logging.DEBUG)
-
-    Returns:
-        logging.Logger: Configured logger instance
-    """
-    # Ensure log directory exists
-    log_path = Path(log_dir)
-    log_path.mkdir(parents=True, exist_ok=True)
-
-    # Full log file path
-    log_file = log_path / log_file_name
-
-    # Create or get logger
+def get_logger(name: str = __name__, level=logging.INFO):
     logger = logging.getLogger(name)
     logger.setLevel(level)
-    logger.propagate = False  # Avoid duplicate logs if parent loggers exist
 
-    # Only add handlers once
     if not logger.handlers:
-        # Log format
-        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+        # File handler
+        file_handler = logging.FileHandler(LOG_FILE, encoding="utf-8")
+        file_formatter = logging.Formatter(
+            "[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S"
+        )
+        file_handler.setFormatter(file_formatter)
 
-        # File handler (UTF-8 encoded)
-        file_handler = logging.FileHandler(log_file, encoding="utf-8")
-        file_handler.setFormatter(formatter)
+        # Stream handler
+        stream_handler = logging.StreamHandler()
+        stream_handler.setFormatter(file_formatter)
 
-        # Console handler
-        console_handler = logging.StreamHandler()
-        console_handler.setFormatter(formatter)
-
-        # Add handlers
         logger.addHandler(file_handler)
-        logger.addHandler(console_handler)
+        logger.addHandler(stream_handler)
+        logger.propagate = False
 
     return logger
