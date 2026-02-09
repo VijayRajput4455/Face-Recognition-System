@@ -7,7 +7,7 @@ from mtcnn.mtcnn import MTCNN
 
 # ------------------- Local Modules ---------------------------
 from logger import get_logger
-from config import CHROMA_DB_PATH
+from config import CHROMA_DB_PATH, COLLECTION_NAME, MODEL_NAME
 from face_embedding_manager import FaceEmbeddingManager
 from transformers import CLIPProcessor, CLIPModel
 
@@ -16,7 +16,7 @@ logger = get_logger(__name__)
 face_embedding = FaceEmbeddingManager()
 
 class FaceRecognitionSystem:
-    def __init__(self, chroma_db_path=CHROMA_DB_PATH, model_name="openai/clip-vit-base-patch32"):
+    def __init__(self, chroma_db_path=CHROMA_DB_PATH, model_name=MODEL_NAME):
         """
         Initialize the Face Recognition System with ChromaDB and CLIP.
         """
@@ -33,8 +33,13 @@ class FaceRecognitionSystem:
 
         # Initialize ChromaDB
         try:
-            self.chroma_client = chromadb.PersistentClient(path=chroma_db_path)
-            self.collection = self.chroma_client.get_or_create_collection(name="FaceEmbeddings")
+            self.chroma_client = chromadb.PersistentClient(
+                                        path=str(chroma_db_path),
+                                        settings=chromadb.config.Settings(
+                                            anonymized_telemetry=False
+                                        )
+                                    )
+            self.collection = self.chroma_client.get_or_create_collection(name=COLLECTION_NAME)
             self.logger.info("ChromaDB initialized successfully.")
         except Exception as e:
             self.logger.error(f"Error initializing ChromaDB: {e}")
@@ -43,7 +48,7 @@ class FaceRecognitionSystem:
         # Load CLIP model for embedding generation (optional)
         try:
             self.clip_model = CLIPModel.from_pretrained(model_name)
-            self.clip_processor = CLIPProcessor.from_pretrained(model_name)
+            self.clip_processor = CLIPProcessor.from_pretrained(model_name, use_fast=True)
             self.logger.info("CLIP model loaded successfully.")
         except Exception as e:
             self.logger.error(f"Error loading CLIP model: {e}")

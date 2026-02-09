@@ -10,7 +10,7 @@ from PIL import UnidentifiedImageError
 from transformers import CLIPProcessor, CLIPModel
 
 # ------------------- Local Modules ---------------------------
-from config import CHROMA_DB_PATH, FRAME_STORAGE_DIR
+from config import CHROMA_DB_PATH, FRAME_STORAGE_DIR, COLLECTION_NAME, MODEL_NAME
 from logger import get_logger
 from face_data_manager import FaceDataManager
 
@@ -20,18 +20,23 @@ face_manager = FaceDataManager()
 
 
 class FaceEmbeddingManager:
-    def __init__(self, chroma_db_path=CHROMA_DB_PATH, collection_name="FaceEmbeddings"):
+    def __init__(self, chroma_db_path=CHROMA_DB_PATH, collection_name=COLLECTION_NAME):
         """
         Initializes ChromaDB client, CLIP model, and sets up the embedding manager.
         """
-        self.model_name = "openai/clip-vit-base-patch32"
+        self.model_name = MODEL_NAME
         logger.info(f"Loading CLIP model: {self.model_name}")
         self.model = CLIPModel.from_pretrained(self.model_name)
-        self.processor = CLIPProcessor.from_pretrained(self.model_name)
+        self.processor = CLIPProcessor.from_pretrained(self.model_name, use_fast=True)
 
         logger.info("Initializing ChromaDB Client...")
         try:
-            self.chroma_client = chromadb.PersistentClient(path=chroma_db_path)
+            self.chroma_client = chromadb.PersistentClient(
+                                        path=str(chroma_db_path),
+                                        settings=chromadb.config.Settings(
+                                            anonymized_telemetry=False
+                                        )
+                                    )
             self.collection = self.chroma_client.get_or_create_collection(name=collection_name)
             logger.info("ChromaDB initialized successfully.")
         except Exception as e:

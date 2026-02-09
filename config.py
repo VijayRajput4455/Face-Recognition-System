@@ -16,5 +16,8 @@ LOG_DIR = "face_logs"
 LOG_FILE = "face_recognition.log"
 
 # ------------------- Ensure Directories Exist ----------------
-for directory in [MAIN_DIR, FRAME_STORAGE_DIR, VIDEO_STORAGE_DIR, CHROMA_DB_PATH.parent]:
+for directory in [MAIN_DIR, FRAME_STORAGE_DIR, VIDEO_STORAGE_DIR, CHROMA_DB_PATH]:
     directory.mkdir(parents=True, exist_ok=True)
+
+COLLECTION_NAME = "FaceEmbeddings"
+MODEL_NAME = "openai/clip-vit-base-patch32"
