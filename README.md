@@ -598,14 +598,14 @@ Use the interactive Swagger UI at: `http://localhost:8000/docs`
 - **CPU**: Dual-core processor
 - **RAM**: 8GB
 - **Storage**: 10GB
-- **Python**: 3.8+
+- **Python**: 3.10
 
 ### Recommended
 - **CPU**: Quad-core or better (Intel i5/AMD Ryzen 5 or equivalent)
 - **RAM**: 16GB
 - **GPU**: NVIDIA GPU with CUDA support (GTX 1050 or better)
 - **Storage**: 50GB SSD
-- **Python**: 3.10 or 3.11
+- **Python**: 3.10
 
 ### For GPU Acceleration
 - NVIDIA CUDA Toolkit 11.8 or higher
