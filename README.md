@@ -86,7 +86,7 @@ Face-Recognition-System/
 ## Installation & Setup
 
 ### Prerequisites
-- **Python 3.8+** (Recommended: Python 3.10 or 3.11)
+- **Python 3.10** (Recommended)
 - **Git** (for version control)
 - **pip** or **conda** (for package management)
 - **CUDA** (Optional, for GPU acceleration - NVIDIA GPUs only)
@@ -263,7 +263,7 @@ curl "http://localhost:8000/process_video?name=John%20Doe&age=30&gender=M&employ
 
 ### Complete Dependency List
 
-The `requirements.txt` file contains all 120+ dependencies including:
+The `requirements.txt` file contains all 120+ dependencies, including:
 
 **Web Framework & Server:**
 - fastapi==0.118.3
@@ -336,7 +336,7 @@ pip install -r requirements.txt
 4. FaceEmbeddingManager
    ├── Reads images from person folders
    ├── Detects faces using MTCNN
-   ├── Generates embeddings using CLIP model
+   ├── Generates embeddings using the CLIP model
    └── Stores embeddings in ChromaDB
    ↓
 5. FaceDataManager
@@ -383,7 +383,7 @@ This structure allows the system to track metadata automatically.
 **Key Classes & Methods:**
 - `FaceRecognitionSystem` - Main class
   - `extract_faces()` - Detect faces in images
-  - `search_face()` - Search similar faces in database
+  - `search_face()` - Search similar faces in the database
 
 ---
 
@@ -428,11 +428,11 @@ This structure allows the system to track metadata automatically.
 ---
 
 ### 6. **autotrain_service.py** - Background Training
-- Runs as daemon thread (polls every 10 minutes)
+- Runs as a daemon thread (polls every 10 minutes)
 - Monitors for new video extracts
 - Automatically generates embeddings
-- Moves processed data to main dataset
-- Thread-safe with lock mechanism
+- Moves processed data to the main dataset
+- Thread-safe with a lock mechanism
 
 **Key Function:**
 - `autotrain()` - Main auto-training loop
@@ -443,7 +443,7 @@ This structure allows the system to track metadata automatically.
 - Centralized logging configuration
 - Logs to both file and console
 - Format: `[TIMESTAMP] [LEVEL] [MODULE] MESSAGE`
-- Stored in `face_logs/face_recognition.log`
+- Stored in `face_logs/face_recognition.log.`
 
 ---
 
@@ -456,7 +456,7 @@ This structure allows the system to track metadata automatically.
 
 ## Directory Structure
 
-After first run, your project will have this structure:
+After the first run, your project will have this structure:
 
 ```
 Face-Recognition-System/
