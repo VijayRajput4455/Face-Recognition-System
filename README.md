@@ -93,6 +93,7 @@ Face-Recognition-System/
 
 ### Step 1: Clone or Download the Repository
 ```bash
+git clone https://github.com/VijayRajput4455/Face-Recognition-System.git
 cd /path/to/Face-Recognition-System
 ```
 
